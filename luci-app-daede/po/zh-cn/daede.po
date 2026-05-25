@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
-"Language: zh-Hans\n"
+"Language: zh-cn\n"
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -232,6 +232,33 @@ msgid "Truncate %s log on the router? This cannot be undone."
 msgstr "确定要清空路由器上的 %s 日志吗？此操作不可恢复。"
 
 # ---- updates.js: Data Updates ----
+msgid "Settings"
+msgstr "设置"
+
+msgid "Updates"
+msgstr "更新"
+
+msgid "Log"
+msgstr "日志"
+
+msgid "Data Updates"
+msgstr "数据更新"
+
+msgid "Package Updates"
+msgstr "软件包更新"
+
+msgid "System Health"
+msgstr "系统健康"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Upgrade"
+msgstr "升级"
+
+msgid "Clean"
+msgstr "清理"
+
 msgid "missing — click Update to fetch"
 msgstr "缺失——点 Update 下载"
 
@@ -248,8 +275,20 @@ msgid "%s update error: %s"
 msgstr "%s 更新出错：%s"
 
 # ---- updates.js: Package Updates ----
+msgid "%s binary"
+msgstr "%s 内核"
+
 msgid "active"
 msgstr "当前"
+
+msgid "installed"
+msgstr "已安装"
+
+msgid "latest"
+msgstr "最新"
+
+msgid "up to date"
+msgstr "已是最新"
 
 msgid "not installed via package manager"
 msgstr "非包管理器安装"
@@ -275,6 +314,21 @@ msgstr "%s 升级出错：%s"
 # ---- updates.js: System Health ----
 msgid "Probing…"
 msgstr "检测中…"
+
+msgid "%s process"
+msgstr "%s 进程"
+
+msgid "Kernel BTF"
+msgstr "内核 BTF"
+
+msgid "WebUI/API"
+msgstr "WebUI/API"
+
+msgid "Hot reload"
+msgstr "热重载"
+
+msgid "netns daens"
+msgstr "netns daens"
 
 msgid "pgrep reports the backend is running"
 msgstr "pgrep 检测到后端正在运行"

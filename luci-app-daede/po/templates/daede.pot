@@ -217,6 +217,33 @@ msgstr ""
 msgid "Truncate %s log on the router? This cannot be undone."
 msgstr ""
 
+msgid "Settings"
+msgstr ""
+
+msgid "Updates"
+msgstr ""
+
+msgid "Log"
+msgstr ""
+
+msgid "Data Updates"
+msgstr ""
+
+msgid "Package Updates"
+msgstr ""
+
+msgid "System Health"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Upgrade"
+msgstr ""
+
+msgid "Clean"
+msgstr ""
+
 msgid "missing — click Update to fetch"
 msgstr ""
 
@@ -232,7 +259,19 @@ msgstr ""
 msgid "%s update error: %s"
 msgstr ""
 
+msgid "%s binary"
+msgstr ""
+
 msgid "active"
+msgstr ""
+
+msgid "installed"
+msgstr ""
+
+msgid "latest"
+msgstr ""
+
+msgid "up to date"
 msgstr ""
 
 msgid "not installed via package manager"
@@ -257,6 +296,21 @@ msgid "%s upgrade error: %s"
 msgstr ""
 
 msgid "Probing…"
+msgstr ""
+
+msgid "%s process"
+msgstr ""
+
+msgid "Kernel BTF"
+msgstr ""
+
+msgid "WebUI/API"
+msgstr ""
+
+msgid "Hot reload"
+msgstr ""
+
+msgid "netns daens"
 msgstr ""
 
 msgid "pgrep reports the backend is running"
@@ -303,4 +357,3 @@ msgstr ""
 
 msgid "Download"
 msgstr ""
-

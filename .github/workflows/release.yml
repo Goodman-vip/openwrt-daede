@@ -185,7 +185,7 @@ jobs:
 
             echo "## Packages / 安装包"
             echo ""
-            echo "> **luci-app-daede** 是纯 LuCI 前端包（noarch），各架构通用。"
+            echo "> **luci-app-daede** 是纯 LuCI 前端包（noarch），各架构通用，已内置中文语言文件。"
             echo "> 后缀含义：\`25.12\` = APK 格式（OpenWrt 主线），\`24.10\` = IPK 格式。"
             echo ""
 
@@ -207,7 +207,7 @@ jobs:
               name=$(basename "$f")
               # 文件名形如 luci-app-daede_1.1-r1_all.ipk
               echo "- [${name}](${BASE}/${name})（all 架构通用）"
-            done | head -1
+            done | sort
           } > release_notes.md
 
           cat release_notes.md
@@ -265,22 +265,16 @@ jobs:
             mkdir -p "$target"
             cp -v "$dir/feed/"* "$target/" 2>/dev/null || true
 
-            luci=""
-            i18n=""
-
             if ls "$target"/luci-app-daede_*.ipk >/dev/null 2>&1; then
               luci=$(basename "$(ls "$target"/luci-app-daede_*.ipk | sort -V | tail -1)")
-              i18n=$(basename "$(ls "$target"/luci-i18n-daede-zh-cn_*.ipk 2>/dev/null | head -1)")
             elif ls "$target"/luci-app-daede-*.apk >/dev/null 2>&1; then
               luci=$(basename "$(ls "$target"/luci-app-daede-*.apk | sort -V | tail -1)")
-              i18n=$(basename "$(ls "$target"/luci-i18n-daede-zh-cn-*.apk 2>/dev/null | head -1)")
+            else
+              luci=""
             fi
 
             if [ -n "$luci" ]; then
-              {
-                echo "luci=$luci"
-                [ -n "$i18n" ] && echo "i18n=$i18n"
-              } > "$target/manifest.txt"
+              echo "luci=$luci" > "$target/manifest.txt"
             fi
           done
           find feed -type f | sort
