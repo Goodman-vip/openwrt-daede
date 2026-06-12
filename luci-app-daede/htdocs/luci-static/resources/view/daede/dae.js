@@ -226,6 +226,7 @@ function renderDaeForms(ctx) {
 	s.anonymous = true;
 	o = s.option(form.Value, 'name', _('Name'));
 	o.rmempty = false;
+	o.default = 'proxy';  /* real default value, editable — a bright placeholder looked filled and tripped the required check */
 	o.placeholder = 'proxy';
 	o.validate = function(sid, v) {
 		if (!v) return _('Name is required');
@@ -266,6 +267,7 @@ function renderDaeForms(ctx) {
 	o.default = '0';
 	o = s.option(form.Value, 'fallback', _('Fallback group'),
 		_('Default outbound for everything else.'));
+	o.default = 'proxy';  /* matches the default proxy group so the box works out of the box */
 	if (groupNames.length)
 		groupNames.forEach(function(n) { o.value(n, n); });
 	else
