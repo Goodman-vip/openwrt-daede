@@ -2,8 +2,7 @@
 
 set -eu
 
-B2_FEED_BASE_URL="https://kenzo111.s3.us-west-004.backblazeb2.com/openwrt-feed/daed"
-B2_FEED_FALLBACK_URL="https://down.dllkids.xyz/openwrt-feed/daed"
+FEED_BASE_URL="https://down.dllkids.xyz/openwrt-feed/daed"
 GITHUB_API_URL="https://api.github.com/repos/kenzok8/openwrt-daede/releases/latest"
 GITHUB_PROXY_PREFIX="${GITHUB_PROXY_PREFIX:-https://ghfast.top/}"
 TMP_DIR="/tmp/daede-install"
@@ -84,10 +83,9 @@ fallback_arch() {
   esac
 }
 
-# Two B2-compatible bases tried per SDK/arch: primary B2 bucket, then the
-# dllkids mirror (reachable from mainland China when B2 is blocked).
+# Feed base for package manifests and files.
 feed_bases() {
-  printf '%s\n%s\n' "$B2_FEED_BASE_URL" "$B2_FEED_FALLBACK_URL"
+  printf '%s\n' "$FEED_BASE_URL"
 }
 
 feed_base_for() {
@@ -112,7 +110,7 @@ manifest_value() {
   printf '%s\n' "$MANIFEST_TEXT" | sed -n "s/^$1=//p" | head -n 1
 }
 
-# Resolve every wanted package from the B2 manifest. Manifest lines look like:
+# Resolve every wanted package from the R2 feed manifest. Manifest lines look like:
 #   dae=dae_..._<arch>.ipk
 #   dae_sha256=<hex>           (optional)
 #   daed=...
@@ -278,7 +276,7 @@ SDK="$(detect_sdk || true)"
 RESOLVED_ARCH=""
 for a in "$ARCH" $(fallback_arch "$ARCH" || true); do
   if [ -n "$SDK" ] && resolve_from_manifest "$SDK" "$a"; then
-    echo "Using B2 manifest: ${SDK}/${a}"
+    echo "Using R2 feed manifest: ${SDK}/${a}"
     RESOLVED_ARCH="$a"; break
   elif resolve_from_github "$a" "$EXT"; then
     echo "Using GitHub latest release: ${a}"

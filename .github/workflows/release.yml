@@ -361,23 +361,27 @@ jobs:
           sudo install -m 0755 "rclone-v${RCLONE_VER}-linux-amd64/rclone" /usr/local/bin/rclone
           rclone version
 
-      - name: Upload to Backblaze B2
+      - name: Upload to Cloudflare R2
         env:
-          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
-          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
-          B2_BUCKET: ${{ secrets.B2_BUCKET }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
         run: |
-          [ -z "$B2_KEY_ID" ] && { echo "No B2 credentials, skipping"; exit 0; }
+          [ -z "$R2_ACCESS_KEY_ID" ] && { echo "No R2 credentials, skipping"; exit 0; }
           mkdir -p ~/.config/rclone
           cat > ~/.config/rclone/rclone.conf <<EOF
-          [b2]
-          type = b2
-          account = ${B2_KEY_ID}
-          key = ${B2_APPLICATION_KEY}
-          hard_delete = true
+          [r2]
+          type = s3
+          provider = Cloudflare
+          access_key_id = ${R2_ACCESS_KEY_ID}
+          secret_access_key = ${R2_SECRET_ACCESS_KEY}
+          endpoint = ${R2_ENDPOINT}
+          acl = private
+          no_check_bucket = true
           EOF
           find feed -type f | grep -q . || { echo "feed empty, skip sync"; exit 0; }
-          rclone sync feed/ "b2:${B2_BUCKET}/openwrt-feed/daed/" \
+          rclone sync feed/ "r2:${R2_BUCKET}/openwrt-feed/daed/" \
             --checksum \
             --fast-list \
             --transfers 8 \
